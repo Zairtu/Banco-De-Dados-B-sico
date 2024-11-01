@@ -1,0 +1,63 @@
+create table Departamento(
+dep_id int not null auto_increment,
+dep_nome varchar(45) not null,
+dep_dt_ini_gerente date,
+fun_id_supervisor int ,
+primary key(dep_id)
+)
+
+insert into departamento values
+("1","Contabilidade","2001-09-11","3"),
+("2","TI","2024-11-01","1"),
+("3","Vendas","1996-03-30","2"),
+("4","RH","2024-11-01","4"),
+("5","Administração","1996-05-15","2")
+
+create table Local_dep(
+dep_id int not null,
+loc_nome varchar(45) not null,
+foreign key(dep_id) references Departamento(dep_id),
+primary key(dep_id, loc_nome)
+)
+
+insert into local_dep values
+("1","Casa"),
+("2","Lago do Arouche"),
+("3","Nova Iorque"),
+("4","Casa do Ari"),
+("5","Cuiaba")
+
+
+create table Projeto(
+prj_id int not null auto_increment,
+prj_nome varchar(45) not null,
+prj_local varchar(45),
+dep_id int,
+foreign key (dep_id) references Departamento(dep_id),
+primary key(prj_id)
+)
+
+insert into projeto values 
+("1","Banco de Dados","SQL","1"),
+("2","Site","React","1"),
+("3","Nuvem","Nuvem","1"),
+("4","Programação Orientada a Objeto","Java","1"),
+("5","Plataforma de Venda","Computador","1")
+
+
+create table Trabalha_em(
+fun_id int,
+prj_id int,
+horas decimal(3,1),
+foreign key (fun_id) references Funcionario (fun_id),
+foreign key (prj_id) references Projeto (prj_id)
+)
+
+insert into trabalha_em values
+("1","1","7.1"),
+("2","2","5"),
+("3","3","7"),
+("4","4","8"),
+("5","1","8");
+
+
